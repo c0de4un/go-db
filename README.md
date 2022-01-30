@@ -7,8 +7,8 @@ Example project of database realization using drivers and models
 # Requirements
  * Go 1.7+;
 
-# Testign
- * run: <go test>
+# Test
+ * $go test
  
 # Examples:
 ## Connect/Disconnect
