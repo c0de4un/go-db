@@ -5,7 +5,7 @@ Golang based database realization
 Example project of database realization using drivers and models
 
 # Requirements
- * Go 1.7+;
+ * Go 1.17+;
 
 # Test
  * $go test
