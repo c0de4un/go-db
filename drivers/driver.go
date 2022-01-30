@@ -3,6 +3,7 @@ package driver
 import (
 	"bufio"
 	"errors"
+	"fmt"
 	"os"
 	"strings"
 )
@@ -12,6 +13,23 @@ type Configuration struct {
 	name     string
 	login    string
 	password string
+}
+
+type Row struct {
+	cols map[string]string
+}
+
+type ISerializable interface {
+	Serialize() string
+}
+
+type IDeserializable interface {
+	Deserialize()
+}
+
+type IDriver interface {
+	Write(serializable *ISerializable) error
+	Read(deserializable *IDeserializable) error
 }
 
 func (cfg *Configuration) SetUri(uri string) {
@@ -37,6 +55,19 @@ func (cfg *Configuration) SetLogin(login string) {
 
 func (cfg *Configuration) SetPassword(password string) {
 	cfg.password = password
+}
+
+func (row *Row) GetCol(name string) (string, error) {
+	output, ok := row.cols[name]
+	if !ok {
+		return "", fmt.Errorf("database::driver::GetCol: column '%s' is not found", name)
+	}
+
+	return output, nil
+}
+
+func (row *Row) SetCol(name string, val string) {
+	row.cols[name] = val
 }
 
 func LoadConfig(path string) (Configuration, error) {
