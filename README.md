@@ -13,12 +13,7 @@ Example project of database realization using drivers and models
 # Examples:
 ## Connect/Disconnect
 ```go
-config := database.Configuration
-config.SetUri("")
-config.SetDatabaseName("myDB")
-config.SetLogin("")
-config.SetPassword("")
-config.SetEncoding(database.ENCODING_UTF8)
+config := database.LoadConfig("database.cfg")
 
 driver, err := database.NewDriver(database.FILE_DRIVER)
 if err != nil {
